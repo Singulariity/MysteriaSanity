@@ -21,7 +21,7 @@ public class SanityDatabase {
 	public void createData(@Nonnull UUID uuid) {
 		try {
 			PreparedStatement prst = SanityPlugin.getConnection()
-					.prepareStatement("INSERT INTO player_data (Player) VALUES (?)");
+					.prepareStatement("INSERT INTO sanity_data (Player) VALUES (?)");
 			prst.setString(1, uuid.toString());
 			prst.executeUpdate();
 		} catch (SQLException e) {
@@ -32,7 +32,7 @@ public class SanityDatabase {
 	public void setInt(@Nonnull UUID uuid, @Nonnull Column column, int newValue) {
 		try {
 			PreparedStatement prst = SanityPlugin.getConnection()
-					.prepareStatement("UPDATE player_data SET (" + column + ") = (?) WHERE Player = ?");
+					.prepareStatement("UPDATE sanity_data SET (" + column + ") = (?) WHERE Player = ?");
 			prst.setInt(1, newValue);
 			prst.setString(2, uuid.toString());
 			prst.executeUpdate();
@@ -45,7 +45,7 @@ public class SanityDatabase {
 	public Integer getInt(@Nonnull UUID uuid, @Nonnull Column column) {
 		try {
 			Statement st = SanityPlugin.getConnection().createStatement();
-			String query = "SELECT " + column + " FROM player_data WHERE Player = '"+ uuid +"'";
+			String query = "SELECT " + column + " FROM sanity_data WHERE Player = '"+ uuid +"'";
 			ResultSet resultSet = st.executeQuery(query);
 
 			if (resultSet.next()) return resultSet.getInt(1);
@@ -58,7 +58,7 @@ public class SanityDatabase {
 	public boolean hasData(@Nonnull UUID uuid) {
 		try {
 			Statement st = SanityPlugin.getConnection().createStatement();
-			String query = "SELECT 1 FROM player_data WHERE Player = '"+ uuid +"'";
+			String query = "SELECT 1 FROM sanity_data WHERE Player = '"+ uuid +"'";
 			ResultSet resultSet = st.executeQuery(query);
 
 			if (resultSet.next()) return true;

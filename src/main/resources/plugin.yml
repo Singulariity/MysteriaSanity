@@ -3,4 +3,5 @@ version: ${project.version}
 main: com.mysteria.sanity.SanityPlugin
 api-version: 1.16
 authors: [ Singularity ]
-softdepend: [ MysteriaUtils, CustomAPI ]
+depend: [ MysteriaUtils ]
+softdepend: [ CustomAPI ]
